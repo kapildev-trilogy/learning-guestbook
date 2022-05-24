@@ -2,6 +2,7 @@ import { Stack, StackProps } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import * as lambda from 'aws-cdk-lib/aws-lambda';
 import * as apigw from 'aws-cdk-lib/aws-apigateway';
+import { HitCouter } from './hitcounter';
 
 export class LearningGuestbookStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
@@ -13,8 +14,12 @@ export class LearningGuestbookStack extends Stack {
       handler: 'hello.handler',
     })
 
+    const helloWithCounter = new HitCouter(this, 'HelloHitCounter', {
+      downstream: hello,
+    });
+
     new apigw.LambdaRestApi(this, 'Endpoint', {
-      handler: hello
-    })
+      handler: helloWithCounter.handler,
+    });
   }
 }
