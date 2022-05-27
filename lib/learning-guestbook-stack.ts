@@ -1,4 +1,3 @@
-// TODO: Use aws-sdk library
 import * as cdk from '@aws-cdk/core';
 import * as appsync from '@aws-cdk/aws-appsync';
 import * as ddb from '@aws-cdk/aws-dynamodb';
