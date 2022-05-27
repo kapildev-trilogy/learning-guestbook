@@ -1,0 +1,31 @@
+# graphql/schema.graphql
+
+type Comment {
+    websiteUrl: String,
+    creationDate: String,
+    authorName: String,
+    authorEmail: String,
+    comment: String,
+}
+
+input CommentInput {
+    websiteUrl: String!,
+    authorName: String!,
+    authorEmail: String!,
+    comment: String!,
+}
+
+input CommentIdentifier {
+    websiteUrl: String!,
+    creationDate: String!,
+    authorEmail: String!,   
+}
+
+type Query {
+    listComments(websiteUrl: String!): [Comment]
+}
+
+type Mutation {
+    addComment(comment: CommentInput!): Comment
+    removeComment(commentIdentifier: CommentIdentifier!): Comment
+}
