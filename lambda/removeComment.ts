@@ -14,7 +14,7 @@ async function removeComment(commentIdentifier: CommentIdentifier) {
 
     try {
         await docClient.delete(params).promise();
-        return params;
+        return commentIdentifier;
     } catch (err) {
         console.log('DynamoDB error: ', err);
         return null;
