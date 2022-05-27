@@ -9,17 +9,21 @@ type AppSyncEvent = {
     info: {
         fieldName: string,
     },
-    arguments: CommentInput | CommentIdentifier | string,
+    arguments: {
+        comment: CommentInput,
+        commentIdentifier: CommentIdentifier,
+        websiteUrl: string,
+    },
 }
 
 exports.handler = async (event: AppSyncEvent) => {
     switch (event.info.fieldName) {
         case "addComment":
-            return await addComment(event.arguments as CommentInput);
+            return await addComment(event.arguments.comment);
         case "listComments":
-            return await listComments(event.arguments as string);
+            return await listComments(event.arguments.websiteUrl);
         case "removeComment":
-            return await removeComment(event.arguments as CommentIdentifier);
+            return await removeComment(event.arguments.commentIdentifier);
         default: 
             return null;
     }
