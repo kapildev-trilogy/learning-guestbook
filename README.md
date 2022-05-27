@@ -1,15 +1,49 @@
-# Welcome to your CDK TypeScript project
+# Queries to test with:
 
-You should explore the contents of this project. It demonstrates a CDK app with an instance of a stack (`LearningGuestbookStack`)
-which contains an Amazon SQS queue that is subscribed to an Amazon SNS topic.
+```
+mutation AddComment($comment: CommentInput!) {
+  addComment(comment: $comment) {
+    authorEmail
+    authorName
+    comment
+    websiteUrl
+    creationDate
+  }
+}
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+mutation RemoveComment($commentIdentifier: CommentIdentifier!) {
+  removeComment(commentIdentifier: $commentIdentifier) {
+    authorEmail
+    creationDate
+    websiteUrl
+  }
+}
 
-## Useful commands
+query ListComments($websiteUrl:String!) {
+  listComments(websiteUrl: $websiteUrl) {
+    authorEmail
+    authorName
+    comment
+    creationDate
+    websiteUrl
+  }
+}
+```
 
-* `npm run build`   compile typescript to js
-* `npm run watch`   watch for changes and compile
-* `npm run test`    perform the jest unit tests
-* `cdk deploy`      deploy this stack to your default AWS account/region
-* `cdk diff`        compare deployed stack with current state
-* `cdk synth`       emits the synthesized CloudFormation template
+*Query variables:*
+```
+{
+  "comment": {
+    "websiteUrl": "abc",
+    "authorName": "Kapildev",
+    "authorEmail": "kapildev@trilogy.com",
+    "comment": "Some comment"
+  },
+  "commentIdentifier": {
+    "websiteUrl": "abc",
+    "creationDate": "2022-05-27T10:47:26.460Z",
+    "authorEmail": "kapildev@trilogy.com"
+  },
+  "websiteUrl": "abc"
+}
+```
