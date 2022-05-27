@@ -5,9 +5,13 @@ import { getTableName, getPK } from "./commentTableUtils";
 async function listComments(websiteUrl: String) {
     const params = {
         TableName: getTableName(),
-        Key: {
-            PK: getPK({websiteUrl: websiteUrl}),
+        KeyConditionExpression: `#pk = :pk`,
+        ExpressionAttributeNames: {
+            '#pk': 'PK',
         },
+        ExpressionAttributeValues: {
+            ':pk': getPK({websiteUrl: websiteUrl}),
+        }
     };
 
     try {
