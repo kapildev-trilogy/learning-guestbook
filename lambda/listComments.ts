@@ -17,7 +17,6 @@ async function listComments(websiteUrl: String) {
     try {
         const data = await docClient.query(params).promise();
         const items = data.Items;
-        console.log(items);
         return items;
     } catch(err) {
         console.log('DynamoDB error', err);

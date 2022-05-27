@@ -1,5 +1,4 @@
 import addComment from './addComment';
-import Comment from './Comment';
 import CommentIdentifier from './CommentIdentifier';
 import CommentInput from './CommentInput';
 import listComments from './listComments';
